@@ -143,7 +143,7 @@ class Masyarakat extends BaseController
 
     public function buat()
     {
-        if (session()->has('logged_in') and session()->get('logged_in') == true) {
+        if (session()->has('logged_in_mas') and session()->get('logged_in_mas') == true) {
             $kategori = $this->Mkategori->findAll();
             $instansi = $this->Minstansi->findAll();
             $data = [
@@ -159,7 +159,7 @@ class Masyarakat extends BaseController
     }
     public function akunku()
     {
-        if (session()->has('logged_in') and session()->get('logged_in') == true) {
+        if (session()->has('logged_in_mas') and session()->get('logged_in_mas') == true) {
             $limit = 3;
             $nik = session()->get('nik');
             $pengaduanData = $this->Mmasyarakat->where('nik', $nik)->findAll();
@@ -251,7 +251,7 @@ class Masyarakat extends BaseController
                 'instansi' => $masyarakat['instansi'],
                 'jabatan' => $masyarakat['jabatan'],
                 'level' => $masyarakat['level'],
-                'logged_in' => true
+                'logged_in_mas' => true
             ]);
             $session->setFlashdata('pesanlogin', 'Berhasil Masuk');
             return redirect()->to('/profile'); // Redirect ke dashboard Admin

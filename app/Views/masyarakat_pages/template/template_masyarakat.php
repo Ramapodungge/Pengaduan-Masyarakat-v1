@@ -165,7 +165,7 @@
                     <!-- /.form-search -->
 
                     <div class="d-grid d-md-none d-xl-flex gap-15 gap-xl-0 order-3">
-                        <?php if (session()->get('logged_in') != true) : ?>
+                        <?php if (session()->get('logged_in_mas') != true) : ?>
                             <a
                                 class="btn btn-alice-blue text-dark fw-semiBold py-12 px-xl-34 ms-xl-12 rounded-pill"
                                 href="masuk_masyarakat"
@@ -175,7 +175,7 @@
                                 href="daftar_masyarakat"
                                 role="button">Sign Up</a>
                         <?php endif ?>
-                        <?php if (session()->get('logged_in') == true) : ?>
+                        <?php if (session()->get('logged_in_mas') == true) : ?>
                             <a
                                 class="btn btn-primary fw-semiBold py-12 px-xl-43 ms-xl-12 rounded-pill"
                                 href="logout_masyarakat"
