@@ -42,7 +42,7 @@ function formatTanggalIndonesiaWITA($datetime)
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-4 col-md-12">
+        <div class="col-xl-12 col-md-12">
             <div class="card">
 
                 <div class="card-header">
@@ -50,44 +50,50 @@ function formatTanggalIndonesiaWITA($datetime)
                 </div><!-- end card header -->
 
                 <div class="card-body">
-                    <form action="<?= base_url('laporan/filter'); ?>" method="get" class="mb-4" target="_blank">
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <select name="bulan" class="form-select" style="width: 250px;">
-                                <option value="">-- Pilih Bulan --</option>
-                                <?php
-                                $bulanList = [
-                                    '01' => 'Januari',
-                                    '02' => 'Februari',
-                                    '03' => 'Maret',
-                                    '04' => 'April',
-                                    '05' => 'Mei',
-                                    '06' => 'Juni',
-                                    '07' => 'Juli',
-                                    '08' => 'Agustus',
-                                    '09' => 'September',
-                                    '10' => 'Oktober',
-                                    '11' => 'November',
-                                    '12' => 'Desember'
-                                ];
-                                foreach ($bulanList as $key => $val): ?>
-                                    <option value="<?= $key ?>" <?= ($key == ($bulan ?? '')) ? 'selected' : '' ?>><?= $val ?></option>
-                                <?php endforeach; ?>
-                            </select>
-
-                            <select name="tahun" class="form-select" style="width: 120px;">
-                                <option value="">-- Pilih Tahun --</option>
-                                <?php for ($i = date('Y'); $i >= 2020; $i--): ?>
-                                    <option value="<?= $i ?>" <?= ($i == ($tahun ?? '')) ? 'selected' : '' ?>><?= $i ?></option>
-                                <?php endfor; ?>
-                            </select>
-
-                            <button type="submit" class="btn btn-primary">Filter</button>
+                    <form id="filterForm" method="get" class="mb-4 form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <select name="tahun" id="tahun" class="form-control">
+                                    <option value="">-- Pilih Tahun --</option>
+                                    <?php for ($i = date('Y'); $i >= 2020; $i--): ?>
+                                        <option value="<?= $i ?>" <?= ($i == ($tahun ?? '')) ? 'selected' : '' ?>><?= $i ?></option>
+                                    <?php endfor; ?>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <select name="bulan" id="bulan" class="form-control">
+                                    <option value="">-- Pilih Bulan --</option>
+                                    <?php
+                                    $bulanList = [
+                                        '01' => 'Januari',
+                                        '02' => 'Februari',
+                                        '03' => 'Maret',
+                                        '04' => 'April',
+                                        '05' => 'Mei',
+                                        '06' => 'Juni',
+                                        '07' => 'Juli',
+                                        '08' => 'Agustus',
+                                        '09' => 'September',
+                                        '10' => 'Oktober',
+                                        '11' => 'November',
+                                        '12' => 'Desember'
+                                    ];
+                                    foreach ($bulanList as $key => $val): ?>
+                                        <option value="<?= $key ?>" <?= ($key == ($bulan ?? '')) ? 'selected' : '' ?>><?= $val ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
                         </div>
+
+
                     </form>
 
 
                 </div>
 
             </div>
-        </div> <!-- container-fluid -->
-        <?= $this->endSection(); ?>
+        </div>
+        <div id="filteredData"></div> <!-- Menampilkan hasil filter -->
+    </div>
+</div>
+<?= $this->endSection(); ?>

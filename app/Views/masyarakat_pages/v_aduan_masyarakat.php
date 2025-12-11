@@ -59,8 +59,6 @@
                 <div class="form-search-input flex-lg-fill order-1 order-md-2">
                     <!-- Input Pencarian Judul -->
                     <input class="form-control" name="search" id="search" type="search" placeholder="Search" aria-label="Search" value="<?= isset($search) ? $search : '' ?>" />
-                    <!-- Tombol Submit -->
-                    <button class="btn btn-accent text-white shadow-none" type="submit">Search</button>
                 </div>
             </div>
         </form>

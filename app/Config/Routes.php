@@ -85,6 +85,7 @@ $routes->get('/laporan_masyarakat', 'Admin::laporan_masyarakat');
 $routes->get('/laporan_pengaduan', 'Admin::laporan_pengaduan');
 $routes->get('/formulir_pengaduan/(:num)', 'Admin::formulir/$1');
 $routes->get('laporan/filter', 'Admin::filter');
+$routes->get('PDFLaporanfilter', 'Admin::filterPDF');
 
 //untuk link download
 $routes->get('download_bukti/(:any)', 'Masyarakat::download/$1');

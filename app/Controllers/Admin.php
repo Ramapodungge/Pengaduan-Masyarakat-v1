@@ -147,6 +147,38 @@ class Admin extends BaseController
 
     public function filter()
     {
+        $bulan = $this->request->getGet('bulan');
+        $tahun = $this->request->getGet('tahun');
+
+        if (empty($bulan) && empty($tahun)) {
+            return $this->response->setStatusCode(400)->setBody('Bulan atau Tahun harus dipilih');
+        }
+
+        $data['bulan'] = $bulan;
+        $data['tahun'] = $tahun;
+        $instansi_id = session()->get('instansi_id');
+
+        // Mengambil data pengaduan berdasarkan filter
+        if ($bulan && $tahun) {
+            $data['pengaduan'] = $this->Mpengaduan->filterByMonthYear($bulan, $tahun);
+        } else if ($bulan) {
+            $data['pengaduan'] = $this->Mpengaduan->filterByMonth($bulan);
+        } else if ($tahun) {
+            $data['pengaduan'] = $this->Mpengaduan->filterByYear($tahun);
+        } else {
+            $data['pengaduan'] = $this->Mpengaduan->getAllWithJoins();
+        }
+
+        // Jika permintaan AJAX, kirimkan hasil dalam bentuk HTML
+        if ($this->request->isAJAX()) {
+            return view('laporan/_filtered_pengaduan_table', $data);  // Kirim data dalam bentuk HTML untuk menampilkan tabel
+        }
+        log_message('error', 'Bulan: ' . $bulan . ' Tahun: ' . $tahun);
+        return view('laporan/filter_pengaduan', $data);
+    }
+
+    public function filterPDF()
+    {
         $mpdf = new \Mpdf\Mpdf(['orientation' => 'P']);
         $bulan = $this->request->getGet('bulan');
         $tahun = $this->request->getGet('tahun');

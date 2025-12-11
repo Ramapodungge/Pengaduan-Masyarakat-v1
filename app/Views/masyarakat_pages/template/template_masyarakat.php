@@ -118,6 +118,62 @@
             z-index: 9999;
             object-fit: contain;
         }
+
+        /* Gaya untuk loading container */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 9999;
+        }
+
+        /* Gaya untuk bar */
+        .bar {
+            width: 30px;
+            height: 10px;
+            margin: 5px;
+            background-color: #ffffffff;
+            animation: grow 0.8s infinite alternate;
+        }
+
+        /* Setiap bar akan memiliki delay yang berbeda */
+        .bar:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .bar:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .bar:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Animasi untuk bar yang tumbuh */
+        @keyframes grow {
+            0% {
+                height: 10px;
+            }
+
+            100% {
+                height: 30px;
+            }
+        }
+
+        /* Gaya untuk teks loading */
+        .loading-container p {
+            font-size: 16px;
+            color: #ffffffff;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -272,34 +328,133 @@
             confirmPasswordInput.addEventListener('input', checkPasswords);
         });
         $(document).ready(function() {
-            // Event listener untuk form pencarian
-            $('#searchForm').on('submit', function(e) {
-                e.preventDefault(); // Mencegah form dari submit biasa
+            let timeout; // Variabel untuk debounce agar pencarian tidak terlalu sering
 
-                // Ambil data dari form
-                var search = $('#search').val();
-                var instansi = $('#instansi').val();
-                var kategori = $('#kategori').val();
+            // Event listener untuk kolom pencarian
+            $('#search').on('input', function() {
+                clearTimeout(timeout); // Hapus timeout sebelumnya
+                timeout = setTimeout(function() {
+                    var search = $('#search').val(); // Ambil nilai pencarian
+                    var instansi = $('#instansi').val(); // Ambil instansi
+                    var kategori = $('#kategori').val(); // Ambil kategori
+
+                    // Kirim data pencarian menggunakan AJAX
+                    $.ajax({
+                        url: '/Pengaduan/search', // Endpoint controller
+                        type: 'GET',
+                        data: {
+                            search: search,
+                            instansi: instansi,
+                            kategori: kategori
+                        },
+                        beforeSend: function() {
+                            // Menampilkan spinner atau indikator loading
+                            $('#loading').show();
+                        },
+                        success: function(response) {
+                            // Update bagian tabel dengan hasil pencarian
+                            $('#tabelAduan').html(response);
+                        },
+                        error: function() {
+                            alert('Error occurred while searching');
+                        },
+                        complete: function() {
+                            // Sembunyikan spinner setelah pencarian selesai
+                            $('#loading').hide();
+                        }
+                    });
+                }, 500); // Tunggu 500ms setelah input terakhir
+            });
+
+            // Event listener untuk dropdown Instansi
+            $('#instansi').on('change', function() {
+                var search = $('#search').val(); // Ambil nilai pencarian
+                var instansi = $('#instansi').val(); // Ambil instansi
+                var kategori = $('#kategori').val(); // Ambil kategori
 
                 // Kirim data pencarian menggunakan AJAX
                 $.ajax({
-                    url: '/Pengaduan/search', // Endpoint di controller
+                    url: '/Pengaduan/search', // Endpoint controller
                     type: 'GET',
                     data: {
                         search: search,
                         instansi: instansi,
                         kategori: kategori
                     },
+                    beforeSend: function() {
+                        $('#loading').show(); // Menampilkan spinner
+                    },
                     success: function(response) {
-                        // Update bagian tabel dengan hasil pencarian
-                        $('#tabelAduan').html(response); // Misalnya id tabel adalah 'tabelAduan'
+                        $('#tabelAduan').html(response); // Update hasil pencarian
                     },
                     error: function() {
                         alert('Error occurred while searching');
+                    },
+                    complete: function() {
+                        $('#loading').hide(); // Sembunyikan spinner setelah selesai
+                    }
+                });
+            });
+
+            // Event listener untuk dropdown Kategori
+            $('#kategori').on('change', function() {
+                var search = $('#search').val(); // Ambil nilai pencarian
+                var instansi = $('#instansi').val(); // Ambil instansi
+                var kategori = $('#kategori').val(); // Ambil kategori
+
+                // Kirim data pencarian menggunakan AJAX
+                $.ajax({
+                    url: '/Pengaduan/search', // Endpoint controller
+                    type: 'GET',
+                    data: {
+                        search: search,
+                        instansi: instansi,
+                        kategori: kategori
+                    },
+                    beforeSend: function() {
+                        $('#loading').show(); // Menampilkan spinner
+                    },
+                    success: function(response) {
+                        $('#tabelAduan').html(response); // Update hasil pencarian
+                    },
+                    error: function() {
+                        alert('Error occurred while searching');
+                    },
+                    complete: function() {
+                        $('#loading').hide(); // Sembunyikan spinner setelah selesai
                     }
                 });
             });
         });
+        // $(document).ready(function() {
+        //     // Event listener untuk form pencarian
+        //     $('#searchForm').on('submit', function(e) {
+        //         e.preventDefault(); // Mencegah form dari submit biasa
+
+        //         // Ambil data dari form
+        //         var search = $('#search').val();
+        //         var instansi = $('#instansi').val();
+        //         var kategori = $('#kategori').val();
+
+        //         // Kirim data pencarian menggunakan AJAX
+        //         $.ajax({
+        //             url: '/Pengaduan/search', // Endpoint di controller
+        //             type: 'GET',
+        //             data: {
+        //                 search: search,
+        //                 instansi: instansi,
+        //                 kategori: kategori
+        //             },
+        //             success: function(response) {
+        //                 // Update bagian tabel dengan hasil pencarian
+        //                 $('#tabelAduan').html(response); // Misalnya id tabel adalah 'tabelAduan'
+        //             },
+        //             error: function() {
+        //                 alert('Error occurred while searching');
+        //             }
+        //         });
+        //     });
+        // });
 
         <?php if (session()->getFlashdata('error')): ?>
             Swal.fire({

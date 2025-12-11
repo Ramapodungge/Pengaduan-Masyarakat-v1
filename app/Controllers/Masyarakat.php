@@ -84,34 +84,21 @@ class Masyarakat extends BaseController
 
     public function search()
     {
-        // Ambil data dari input form
         $kategori = $this->Mkategori->findAll();
         $instansi = $this->Minstansi->findAll();
         $search = $this->request->getGet('search');
         $instansi_id = $this->request->getGet('instansi');
         $kategori_id = $this->request->getGet('kategori');
-        // $nik = session()->get('nik');  // Ambil nik dari session (misalnya pengguna yang sedang login)
-
-        // Tentukan halaman yang aktif (default halaman 1)
         $page = $this->request->getGet('page') ?? 1;
-
-        // Tentukan batas jumlah data per halaman (limit)
         $limit = 5;
-
-        // Hitung offset berdasarkan halaman
         $offset = ($page - 1) * $limit;
 
-        // Ambil data pengaduan sesuai pencarian dan filter
         $pengaduan = $this->Mpengaduan->searchPengaduan($limit, $page, $search, $instansi_id, $kategori_id);
-
-        // Hitung total data pengaduan yang sesuai dengan pencarian dan filter
         $totalPengaduan = $this->Mpengaduan->countPengaduann($search, $instansi_id, $kategori_id);
 
-        // Pagination
         $pager = \Config\Services::pager();
         $pager->makeLinks($page, $limit, $totalPengaduan);
 
-        // Menambahkan variabel untuk menandakan jika data kosong
         $noData = count($pengaduan) == 0;
 
         // Jika request AJAX, kembalikan hanya bagian tabel
@@ -122,22 +109,21 @@ class Masyarakat extends BaseController
                 'pager' => $pager,
                 'kategori' => $kategori,
                 'instansi' => $instansi,
-                'instansi_id' => $instansi_id, // Pastikan instansi_id ada di view
+                'instansi_id' => $instansi_id,
                 'kategori_id' => $kategori_id,
-                'noData' => $noData // Kirimkan variabel noData
+                'noData' => $noData
             ]);
         }
 
-        // Untuk request normal, kembalikan halaman penuh
         return view('masyarakat_pages/v_aduan_masyarakat', [
             'title' => "Daftar Pengaduan",
             'pengaduan' => $pengaduan,
             'pager' => $pager,
             'kategori' => $kategori,
             'instansi' => $instansi,
-            'instansi_id' => $instansi_id, // Pastikan instansi_id ada di view
+            'instansi_id' => $instansi_id,
             'kategori_id' => $kategori_id,
-            'noData' => $noData // Kirimkan variabel noData
+            'noData' => $noData
         ]);
     }
 

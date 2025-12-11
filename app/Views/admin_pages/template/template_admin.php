@@ -201,18 +201,19 @@
                                 </a>
                             </li>
                             <li class="menu-title mt-2">Laporan</li>
-                            <li class="<?= $title === "Laporan Pengaduan"  ? ' menuitem-active' : '' ?>">
-                                <a href="laporan/pengaduan_laporan" class="tp-link <?= $title === "Laporan Pengaduan"  ? 'active' : '' ?>">
-                                    <i data-feather="airplay"></i>
-                                    <span>Laporan Pengaduan </span>
-                                </a>
-                            </li>
                             <li class="<?= $title === "Filter Pengaduan"  ? ' menuitem-active' : '' ?>">
                                 <a href="laporan/filter_pengaduan" class="tp-link <?= $title === "Filter Pengaduan"  ? 'active' : '' ?>">
                                     <i data-feather="archive"></i>
                                     <span>Filter Pengaduan </span>
                                 </a>
                             </li>
+                            <li class="<?= $title === "Laporan Pengaduan"  ? ' menuitem-active' : '' ?>">
+                                <a href="laporan/pengaduan_laporan" class="tp-link <?= $title === "Laporan Pengaduan"  ? 'active' : '' ?>">
+                                    <i data-feather="airplay"></i>
+                                    <span>Formulir Pengaduan </span>
+                                </a>
+                            </li>
+
                         <?php endif ?>
                         <!-- batas sidebar admin -->
                         <!-- sidebar Operator -->
@@ -233,18 +234,19 @@
                                 </a>
                             </li>
                             <li class="menu-title mt-2">Laporan</li>
-                            <li class="<?= $title === "Laporan Pengaduan"  ? ' menuitem-active' : '' ?>">
-                                <a href="laporan/pengaduan_laporan" class="tp-link <?= $title === "Laporan Pengaduan"  ? 'active' : '' ?>">
-                                    <i data-feather="users"></i>
-                                    <span>Laporan Pengaduan </span>
-                                </a>
-                            </li>
                             <li class="<?= $title === "Filter Pengaduan"  ? ' menuitem-active' : '' ?>">
                                 <a href="laporan/filter_pengaduan" class="tp-link <?= $title === "Filter Pengaduan"  ? 'active' : '' ?>">
                                     <i data-feather="archive"></i>
                                     <span>Filter Pengaduan </span>
                                 </a>
                             </li>
+                            <li class="<?= $title === "Laporan Pengaduan"  ? ' menuitem-active' : '' ?>">
+                                <a href="laporan/pengaduan_laporan" class="tp-link <?= $title === "Laporan Pengaduan"  ? 'active' : '' ?>">
+                                    <i data-feather="users"></i>
+                                    <span>Formulir Pengaduan </span>
+                                </a>
+                            </li>
+
                         <?php endif ?>
                         <!-- batas sidebar operator -->
 
@@ -358,6 +360,44 @@
             passwordInput.addEventListener('input', checkPasswords);
             confirmPasswordInput.addEventListener('input', checkPasswords);
         });
+
+        // SCRIPT FILTERISASI LAPORAN
+        $(document).ready(function() {
+            $('#tahun, #bulan').on('change', function() {
+                var bulan = $('#bulan').val();
+                var tahun = $('#tahun').val();
+
+                // Pastikan parameter bulan atau tahun ada
+                if (!bulan && !tahun) {
+                    alert("Pilih bulan atau tahun terlebih dahulu.");
+                    return;
+                }
+
+                $.ajax({
+                    url: "<?= base_url('laporan/filter'); ?>",
+                    method: "GET",
+                    data: {
+                        bulan: bulan,
+                        tahun: tahun
+                    },
+                    success: function(response) {
+                        console.log("Response: ", response); // Cek apakah data yang dikirim sudah benar
+                        $('#filteredData').html(response); // Menampilkan data hasil filter
+                    },
+                    error: function(xhr, status, error) {
+                        // Log error untuk debugging
+                        console.log("Error Status: " + status);
+                        console.log("Error Message: " + error);
+                        console.log("Response Text: " + xhr.responseText);
+                        alert("Terjadi kesalahan saat memuat data!");
+                    }
+                });
+
+            });
+        });
+
+
+
         <?php if (session()->getFlashdata('pesanloginerr')): ?>
             Swal.fire({
                 position: "top-end",

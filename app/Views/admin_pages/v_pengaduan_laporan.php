@@ -46,7 +46,7 @@ function formatTanggalIndonesiaWITA($datetime)
             <div class="card">
 
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Daftar Pengaduan</h5>
+                    <h5 class="card-title mb-0">Daftar Formulir Pengaduan</h5>
                 </div><!-- end card header -->
 
                 <div class="card-body">
@@ -54,7 +54,6 @@ function formatTanggalIndonesiaWITA($datetime)
                     <div class="row">
                         <div class="col-12">
                             <?php if (session()->get('level') == 'admin'): ?>
-                                <a href="laporan_pengaduan" class="mb-3" target="_blank"><Button type="button" class="btn btn-md btn-success mb-2"><i data-feather="printer"></i> Print Pengaduan</Button></a>
                                 <div class="dt-responsive table-responsive nowrap">
                                     <table id="datatable" class="table table-bordered ">
                                         <thead>

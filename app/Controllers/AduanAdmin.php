@@ -298,7 +298,7 @@ class AduanAdmin extends BaseController
                 'title' => 'Filter Pengaduan',
                 'pengaduan_perstatus' => $pengaduan_perstatus,
                 'pengaduan' => $allpengaduan,
-                'pengaduanOP' => $allpengaduanOP
+                'pengaduanOP' => $allpengaduanOP,
 
             ];
             return view('admin_pages/v_pengaduan_laporan_filter', $data);

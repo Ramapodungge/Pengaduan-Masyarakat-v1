@@ -6,6 +6,13 @@
             Data yang Anda cari tidak ditemukan.
         </div>
     <?php else: ?>
+        <!-- <div id="loading" style="display: none;">Loading...</div> -->
+        <div class="loading-container" id="loading" style="display: none;">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <p>Searching...</p>
+        </div>
         <div class="position-relative profile-card-slider mt-lg-25">
             <div class="d-grid mt-60 gap-34">
 

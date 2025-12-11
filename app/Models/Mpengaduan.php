@@ -206,6 +206,7 @@ class Mpengaduan extends Model
     {
         return $this->where('id_instansi', $id_instansi)->countAllResults();
     }
+
     // Mendapatkan pengaduan terbaru
     public function getPengaduanTerbaru()
     {
@@ -393,5 +394,32 @@ class Mpengaduan extends Model
         }
 
         return $builder->orderBy('pengaduan.created_at', 'DESC')->get()->getResultArray();
+    }
+
+
+    // Filter berdasarkan bulan
+    public function filterByMonth($bulan)
+    {
+        return $this->db->table($this->table)
+            ->select('pengaduan.*, masyarakat.nama_pengadu as nama_masyarakat, kategori_pengaduan.nama_kategori as nama_kategori, instansi.nama_instansi as nama_instansi')
+            ->join('masyarakat', 'masyarakat.nik = pengaduan.id_masyarakat', 'left')
+            ->join('kategori_pengaduan', 'kategori_pengaduan.id_kategori = pengaduan.id_kategori', 'left')
+            ->join('instansi', 'instansi.id_instansi = pengaduan.id_instansi', 'left')
+            ->where('MONTH(pengaduan.created_at)', $bulan)
+            ->orderBy('pengaduan.created_at', 'DESC')
+            ->get()->getResultArray();
+    }
+
+    // Filter berdasarkan tahun
+    public function filterByYear($tahun)
+    {
+        return $this->db->table($this->table)
+            ->select('pengaduan.*, masyarakat.nama_pengadu as nama_masyarakat, kategori_pengaduan.nama_kategori as nama_kategori, instansi.nama_instansi as nama_instansi')
+            ->join('masyarakat', 'masyarakat.nik = pengaduan.id_masyarakat', 'left')
+            ->join('kategori_pengaduan', 'kategori_pengaduan.id_kategori = pengaduan.id_kategori', 'left')
+            ->join('instansi', 'instansi.id_instansi = pengaduan.id_instansi', 'left')
+            ->where('YEAR(pengaduan.created_at)', $tahun)
+            ->orderBy('pengaduan.created_at', 'DESC')
+            ->get()->getResultArray();
     }
 }
