@@ -28,6 +28,7 @@ class Masyarakat extends BaseController
         $this->Mhistori = new Mhistori();
         $this->Mfeedback = new Mfeedback();
     }
+
     public function index()
     {
 

@@ -336,7 +336,7 @@ function merubah_tanggal($tgl)
 <!-- Modals -->
 <?php foreach ($penggunarow as $adus): ?>
     <div class="modal fade" id="bs-example-modal-center4" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Update Data</h5>
@@ -344,8 +344,8 @@ function merubah_tanggal($tgl)
                     </button>
                 </div>
 
-                <form class="row g-3" method="POST" action="update-data-masyrakat/<?= session()->get('nik') ?>">
-                    <div class="modal-body">
+                <div class="modal-body">
+                    <form class="row" method="POST" action="update-data-masyrakat/<?= session()->get('nik') ?>">
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Nama Lengkap</label>
                             <input name="nama" class="form-control" type="text" required="" value="<?= $adus['nama_pengadu'] ?>">
@@ -354,16 +354,16 @@ function merubah_tanggal($tgl)
                             <label for="password" class="form-label">Alamat</label>
                             <textarea name="alamat" class="form-control"><?= $adus['alamat'] ?></textarea>
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-5">
                             <label for="password" class="form-label">No Hp</label>
                             <input name="nohp" class="form-control" type="text" required="" value="<?= $adus['no_telpon'] ?>">
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-sm btn-primary" id="submitBtn">Save changes</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-sm btn-primary" id="submitBtn">Save changes</button>
+                        </div>
+                    </form>
+                </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>

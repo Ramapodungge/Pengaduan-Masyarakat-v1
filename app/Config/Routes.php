@@ -6,6 +6,8 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+$routes->get('/masyarakat/api', 'ApiMasyarakat::index');
+
 $routes->get('/masuk_admin', 'Login::index');
 $routes->get('/buat_akun', 'Login::buat');
 $routes->get('/akun_saya', 'Pengguna::profile');
