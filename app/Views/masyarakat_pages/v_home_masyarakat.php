@@ -25,7 +25,7 @@
                         <div class="d-flex flex-wrap align-items-center mt-60 gap-20">
                             <a
                                 class="btn btn-primary fw-semiBold py-12 px-34 rounded-pill"
-                                href="buataduan"
+                                href="/masyarakat/buataduan"
                                 role="button"><i class="fas fa-pencil"></i> Ajukan Aduan Sekarang</a>
                             <a
                                 class="btn btn-cultured fw-semiBold py-12 px-34 rounded-pill"

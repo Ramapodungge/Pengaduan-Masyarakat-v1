@@ -41,7 +41,7 @@
 
             <div class="d-grid bg-white p-20 p-md-34 p-xxl-43 mt-24 gap-34 rounded-20 shadow-2">
                 <?php if (session()->getFlashdata('pesan_aduan')) : ?>
-                    <div class="alert alert-success alert-dismissible bg-success fade show" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color: #47F58F;">
                         <strong>Berhasil!</strong> <?= session()->getFlashdata('pesan_aduan'); ?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
