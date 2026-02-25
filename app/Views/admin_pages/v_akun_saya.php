@@ -45,7 +45,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-                <form class="row g-3" method="POST" action="update_profile/<?= esc($pengguna1row['id_admin']) ?>">
+                <form class="row g-3" method="POST" action="/admin/update_profile/<?= esc($pengguna1row['id_admin']) ?>">
                     <div class="modal-body">
                         <div class="col-12 mt-3">
                             <label for="validationDefault01" class="form-label">Nama Operator</label>

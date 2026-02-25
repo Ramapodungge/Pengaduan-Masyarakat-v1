@@ -314,7 +314,7 @@ function merubah_tanggal($tgl)
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <form class="row g-3" method="POST" action="reset-password-masyrakat/<?= session()->get('nik') ?>">
+            <form class="row g-3" method="POST" action="/masyarakat/reset-password-masyrakat/<?= session()->get('nik') ?>">
                 <div class="modal-body">
                     <div class="form-group mb-3">
                         <label for="password" class="form-label">Password</label>
@@ -345,7 +345,7 @@ function merubah_tanggal($tgl)
                 </div>
 
                 <div class="modal-body">
-                    <form class="row" method="POST" action="update-data-masyrakat/<?= session()->get('nik') ?>">
+                    <form class="row" method="POST" action="/masyarakat/update-data-masyrakat/<?= session()->get('nik') ?>">
                         <div class="form-group mb-3">
                             <label for="password" class="form-label">Nama Lengkap</label>
                             <input name="nama" class="form-control" type="text" required="" value="<?= $adus['nama_pengadu'] ?>">

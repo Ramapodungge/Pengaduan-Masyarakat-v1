@@ -163,52 +163,52 @@
                             <li class="menu-title mt-2">Dashborad</li>
 
                             <li class="<?= $title === "Dashboard"  ? ' menuitem-active' : '' ?>">
-                                <a href="dashboard" class="tp-link <?= $title === "Dashboard"  ? 'active' : '' ?>">
+                                <a href="/admin/dashboard" class="tp-link <?= $title === "Dashboard"  ? 'active' : '' ?>">
                                     <i data-feather="bar-chart"></i>
                                     <span> Dashboard </span>
                                 </a>
                             </li>
                             <li class="menu-title mt-2">Lainnya</li>
                             <li class="<?= $title === "Pengaduan"  ? ' menuitem-active' : '' ?>">
-                                <a href="daftaraduan" class="tp-link <?= $title === "Pengaduan"  ? 'active' : '' ?>">
+                                <a href="/admin/daftaraduan" class="tp-link <?= $title === "Pengaduan"  ? 'active' : '' ?>">
                                     <i data-feather="map-pin"></i>
                                     <span> Aduan </span>
                                 </a>
                             </li>
                             <li class="<?= $title === "Instansi"  ? ' menuitem-active' : '' ?>">
-                                <a href="instansi" class="tp-link <?= $title === "Instansi"  ? 'active' : '' ?>">
+                                <a href="/admin/instansi" class="tp-link <?= $title === "Instansi"  ? 'active' : '' ?>">
                                     <i data-feather="briefcase"></i>
                                     <span> Instansi </span>
                                 </a>
                             </li>
                             <li class="<?= $title === "Kategori"  ? ' menuitem-active' : '' ?>">
-                                <a href="kategori" class="tp-link <?= $title === "Kategori"  ? 'active' : '' ?>">
+                                <a href="/admin/kategori" class="tp-link <?= $title === "Kategori"  ? 'active' : '' ?>">
                                     <i data-feather="align-left"></i>
                                     <span> Kategori </span>
                                 </a>
                             </li>
                             <li class="menu-title mt-2">Pengguna</li>
                             <li class="<?= $title === "Masyarakat"  ? ' menuitem-active' : '' ?>">
-                                <a href="pengguna-masyarakat" class="tp-link <?= $title === "Masyarakat"  ? 'active' : '' ?>">
+                                <a href="/admin/pengguna-masyarakat" class="tp-link <?= $title === "Masyarakat"  ? 'active' : '' ?>">
                                     <i data-feather="users"></i>
                                     <span> Masyarakat </span>
                                 </a>
                             </li>
                             <li class="<?= $title === "Operator"  ? ' menuitem-active' : '' ?>">
-                                <a href="operator" class="tp-link <?= $title === "Operator"  ? 'active' : '' ?>">
+                                <a href="/admin/operator" class="tp-link <?= $title === "Operator"  ? 'active' : '' ?>">
                                     <i data-feather="user"></i>
                                     <span> Operator </span>
                                 </a>
                             </li>
                             <li class="menu-title mt-2">Laporan</li>
                             <li class="<?= $title === "Filter Pengaduan"  ? ' menuitem-active' : '' ?>">
-                                <a href="laporan/filter_pengaduan" class="tp-link <?= $title === "Filter Pengaduan"  ? 'active' : '' ?>">
+                                <a href="/admin/laporan/filter_pengaduan" class="tp-link <?= $title === "Filter Pengaduan"  ? 'active' : '' ?>">
                                     <i data-feather="archive"></i>
                                     <span>Filter Pengaduan </span>
                                 </a>
                             </li>
                             <li class="<?= $title === "Laporan Pengaduan"  ? ' menuitem-active' : '' ?>">
-                                <a href="laporan/pengaduan_laporan" class="tp-link <?= $title === "Laporan Pengaduan"  ? 'active' : '' ?>">
+                                <a href="/admin/laporan/pengaduan_laporan" class="tp-link <?= $title === "Laporan Pengaduan"  ? 'active' : '' ?>">
                                     <i data-feather="airplay"></i>
                                     <span>Formulir Pengaduan </span>
                                 </a>
@@ -221,27 +221,27 @@
                             <li class="menu-title mt-2">Dashborad</li>
 
                             <li class="<?= $title === "Dashboard"  ? ' menuitem-active' : '' ?>">
-                                <a href="dashboard" class="tp-link <?= $title === "Dashboard"  ? 'active' : '' ?>">
+                                <a href="/admin/dashboard" class="tp-link <?= $title === "Dashboard"  ? 'active' : '' ?>">
                                     <i data-feather="bar-chart"></i>
                                     <span> Dashboard </span>
                                 </a>
                             </li>
                             <li class="menu-title mt-2">Lainnya</li>
                             <li class="<?= $title === "Pengaduan"  ? ' menuitem-active' : '' ?>">
-                                <a href="daftaraduanoperator" class="tp-link <?= $title === "Pengaduan"  ? 'active' : '' ?>">
+                                <a href="/admin/daftaraduanoperator" class="tp-link <?= $title === "Pengaduan"  ? 'active' : '' ?>">
                                     <i data-feather="map-pin"></i>
                                     <span> Aduan </span>
                                 </a>
                             </li>
                             <li class="menu-title mt-2">Laporan</li>
                             <li class="<?= $title === "Filter Pengaduan"  ? ' menuitem-active' : '' ?>">
-                                <a href="laporan/filter_pengaduan" class="tp-link <?= $title === "Filter Pengaduan"  ? 'active' : '' ?>">
+                                <a href="/admin/laporan/filter_pengaduan" class="tp-link <?= $title === "Filter Pengaduan"  ? 'active' : '' ?>">
                                     <i data-feather="archive"></i>
                                     <span>Filter Pengaduan </span>
                                 </a>
                             </li>
                             <li class="<?= $title === "Laporan Pengaduan"  ? ' menuitem-active' : '' ?>">
-                                <a href="laporan/pengaduan_laporan" class="tp-link <?= $title === "Laporan Pengaduan"  ? 'active' : '' ?>">
+                                <a href="/admin/laporan/pengaduan_laporan" class="tp-link <?= $title === "Laporan Pengaduan"  ? 'active' : '' ?>">
                                     <i data-feather="users"></i>
                                     <span>Formulir Pengaduan </span>
                                 </a>
@@ -374,7 +374,7 @@
                 }
 
                 $.ajax({
-                    url: "<?= base_url('laporan/filter'); ?>",
+                    url: "<?= base_url('admin/laporan/filter'); ?>",
                     method: "GET",
                     data: {
                         bulan: bulan,
@@ -440,7 +440,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Kirim permintaan untuk menghapus data menggunakan AJAX
-                    fetch(`<?= site_url('hapus_instansi/') ?>` + id, {
+                    fetch(`<?= site_url('admin/hapus_instansi/') ?>` + id, {
                             method: 'DELETE'
                         })
                         .then(response => response.json())
@@ -486,7 +486,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Kirim permintaan untuk menghapus data menggunakan AJAX
-                    fetch(`<?= site_url('hapus_kategori/') ?>` + id, {
+                    fetch(`<?= site_url('admin/hapus_kategori/') ?>` + id, {
                             method: 'DELETE'
                         })
                         .then(response => response.json())
@@ -532,7 +532,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Kirim permintaan untuk menghapus data menggunakan AJAX
-                    fetch(`<?= site_url('hapus_deskripsi/') ?>` + id, {
+                    fetch(`<?= site_url('admin/hapus_deskripsi/') ?>` + id, {
                             method: 'DELETE'
                         })
                         .then(response => response.json())

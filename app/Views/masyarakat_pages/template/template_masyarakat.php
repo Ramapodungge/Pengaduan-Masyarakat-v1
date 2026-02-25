@@ -210,7 +210,7 @@
                             <a class="nav-link <?= $title === "Daftar Pengaduan"  ? 'active' : '' ?>" href="aduan_masyarakat">Aduan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= $title === "Buat Aduan"  ? 'active' : '' ?>" href="buataduan">Buat Aduan</a>
+                            <a class="nav-link <?= $title === "Buat Aduan"  ? 'active' : '' ?>" href="/masyarakat/buataduan">Buat Aduan</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?= $title === "Panduan"  ? 'active' : '' ?>" href="panduanview">Tentang Kami</a>
@@ -234,11 +234,11 @@
                         <?php if (session()->get('logged_in_mas') == true) : ?>
                             <a
                                 class="btn btn-primary fw-semiBold py-12 px-xl-43 ms-xl-12 rounded-pill"
-                                href="logout_masyarakat"
+                                href="/masyarakat/logout_masyarakat"
                                 role="button">Logout</a>
                             <a
                                 class="btn btn-primary fw-semiBold py-12 px-xl-43 ms-xl-12 rounded-pill"
-                                href="profile"
+                                href="/masyarakat/profile"
                                 role="button"><i class="fas fa-user"></i>Profil</a>
                         <?php endif ?>
                     </div>

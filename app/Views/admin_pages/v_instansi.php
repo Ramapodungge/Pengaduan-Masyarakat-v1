@@ -51,7 +51,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     </button>
                                                 </div>
-                                                <form class="row g-3" method="POST" action="ubah_instansi/<?= $ins['id_instansi'] ?>">
+                                                <form class="row g-3" method="POST" action="/admin/ubah_instansi/<?= $ins['id_instansi'] ?>">
                                                     <div class="modal-body">
                                                         <div class="col-12 mt-3">
                                                             <label for="validationDefault01" class="form-label">Nama Instansi</label>
@@ -81,7 +81,7 @@
                 </div><!-- end card header -->
 
                 <div class="card-body">
-                    <form class="row g-3" method="POST" action="simpan_instansi">
+                    <form class="row g-3" method="POST" action="/admin/simpan_instansi">
                         <div class="col-12">
                             <label for="validationDefault01" class="form-label">Nama Instansi</label>
                             <input type="text" name="nama_instansi" class="form-control" placeholder="Masukan Nama Instansi" id="validationDefault01" required>

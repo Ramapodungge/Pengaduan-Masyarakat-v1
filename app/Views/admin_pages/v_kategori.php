@@ -49,7 +49,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     </button>
                                                 </div>
-                                                <form class="row g-3" method="POST" action="ubah_kategori/<?= $kat['id_kategori'] ?>">
+                                                <form class="row g-3" method="POST" action="/admin/ubah_kategori/<?= $kat['id_kategori'] ?>">
                                                     <div class="modal-body">
                                                         <div class="col-12 mt-3">
                                                             <label for="validationDefault01" class="form-label">Nama Kategori</label>
@@ -79,7 +79,7 @@
                 </div><!-- end card header -->
 
                 <div class="card-body">
-                    <form class="row g-3" method="POST" action="simpan_kategori">
+                    <form class="row g-3" method="POST" action="admin/simpan_kategori">
                         <div class="col-12">
                             <label for="validationDefault01" class="form-label">Nama Kategori</label>
                             <input type="text" name="nama_kategori" class="form-control" placeholder="Masukan Nama Kategori" id="validationDefault01" required>
@@ -137,7 +137,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                 </button>
                                             </div>
-                                            <form class="row g-3" method="POST" action="ubah_deskripsi/<?= $des['id_deskripsi'] ?>">
+                                            <form class="row g-3" method="POST" action="/admin/ubah_deskripsi/<?= $des['id_deskripsi'] ?>">
                                                 <div class="modal-body">
                                                     <div class="col-12 mt-3">
                                                         <label for="example-textarea" class="form-label">Text area</label>
@@ -179,7 +179,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-                <form class="row g-3" method="POST" action="tambah_deskripsi">
+                <form class="row g-3" method="POST" action="admin/tambah_deskripsi">
                     <div class="modal-body">
                         <div class="col-12 mt-3">
                             <label for="example-textarea" class="form-label">Text area</label>

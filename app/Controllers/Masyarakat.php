@@ -130,60 +130,58 @@ class Masyarakat extends BaseController
 
     public function buat()
     {
-        if (session()->has('logged_in_mas') and session()->get('logged_in_mas') == true) {
-            $kategori = $this->Mkategori->findAll();
-            $instansi = $this->Minstansi->findAll();
-            $data = [
-                'title' => "Buat Aduan",
-                'kategori' => $kategori,
-                'instansi' => $instansi,
-            ];
-            return view('masyarakat_pages/v_buataduan_masyarakat', $data);
-        } else {
-            session()->setFlashdata('pesanlogindulu', 'Anda Harus Login');
-            return redirect()->to(base_url('masuk_masyarakat'));
-        }
+        $kategori = $this->Mkategori->findAll();
+        $instansi = $this->Minstansi->findAll();
+        $data = [
+            'title' => "Buat Aduan",
+            'kategori' => $kategori,
+            'instansi' => $instansi,
+        ];
+        return view('masyarakat_pages/v_buataduan_masyarakat', $data);
     }
     public function akunku()
     {
-        if (session()->has('logged_in_mas') and session()->get('logged_in_mas') == true) {
-            $limit = 3;
-            $nik = session()->get('nik');
-            $pengaduanData = $this->Mmasyarakat->where('nik', $nik)->findAll();
-            // Dapatkan halaman saat ini
+        $limit = 3;
+        $nik = session()->get('nik');
+        $pengaduanData = $this->Mmasyarakat->where('nik', $nik)->findAll();
+        // Dapatkan halaman saat ini
 
-            if (!$pengaduanData) {
-                return redirect()->back()->with('error', 'Data pengaduan tidak ditemukan');
-            }
-
-            // Karena hasil formulirGet berupa array banyak, kita ambil row pertama
-            $masyarakat = $pengaduanData[0];
-            $page = $this->request->getVar('page') ?? 1;
-            $pengaduan = $this->Mpengaduan->getPengaduan($limit, $nik);
-            $pager = $this->Mpengaduan->pager;
-            $kat = $this->Mkategori->findAll();
-            $ins = $this->Minstansi->findAll();
-
-            $data = [
-                'title' => "Profile",
-                'pengaduan' => $pengaduan,
-                'penggunarow' => $pengaduanData,
-                'pengguna1row' => $masyarakat,
-                'pager' => $pager,
-                'kat' => $kat,
-                'ins' => $ins,
-
-            ];
-            return view('masyarakat_pages/v_profile_masyarakat', $data);
-        } else {
-            session()->setFlashdata('pesanlogindulu', 'Anda Harus Login');
-            return redirect()->to(base_url('masuk_masyarakat'));
+        if (!$pengaduanData) {
+            return redirect()->back()->with('error', 'Data pengaduan tidak ditemukan');
         }
+
+        // Karena hasil formulirGet berupa array banyak, kita ambil row pertama
+        $masyarakat = $pengaduanData[0];
+        $page = $this->request->getVar('page') ?? 1;
+        $pengaduan = $this->Mpengaduan->getPengaduan($limit, $nik);
+        $pager = $this->Mpengaduan->pager;
+        $kat = $this->Mkategori->findAll();
+        $ins = $this->Minstansi->findAll();
+
+        $data = [
+            'title' => "Profile",
+            'pengaduan' => $pengaduan,
+            'penggunarow' => $pengaduanData,
+            'pengguna1row' => $masyarakat,
+            'pager' => $pager,
+            'kat' => $kat,
+            'ins' => $ins,
+
+        ];
+        return view('masyarakat_pages/v_profile_masyarakat', $data);
     }
 
     public function detail_aduan($id_aduan)
     {
 
+        $nik = session()->get('nik');
+        $pengaduanData = $this->Mmasyarakat->where('nik', $nik)->findAll();
+        if (!$pengaduanData) {
+            return redirect()->back()->with('error', 'Data pengaduan tidak ditemukan');
+        }
+
+        // Karena hasil formulirGet berupa array banyak, kita ambil row pertama
+        $masyarakat = $pengaduanData[0];
 
         $pengaduan = $this->Mpengaduan->getAll($id_aduan);
         $timline = $this->Mhistori->getHistoris($id_aduan);
@@ -195,6 +193,7 @@ class Masyarakat extends BaseController
         $data = [
             'title' => "Detail Aduan",
             'pengaduan' => $pengaduan,
+            'pengguna1row' => $masyarakat,
             'timline' => $timline,
             'feedback' => $feedback,
             'cek_row' => $cek_rowfeedback,
@@ -237,11 +236,11 @@ class Masyarakat extends BaseController
                 'jurusan' => $masyarakat['jurusan'],
                 'instansi' => $masyarakat['instansi'],
                 'jabatan' => $masyarakat['jabatan'],
-                'level' => $masyarakat['level'],
+                'role' => $masyarakat['level'],
                 'logged_in_mas' => true
             ]);
             $session->setFlashdata('pesanlogin', 'Berhasil Masuk');
-            return redirect()->to('/profile'); // Redirect ke dashboard Admin
+            return redirect()->to('masyarakat/profile'); // Redirect ke dashboard Admin
         }
 
         // Jika login gagal
@@ -363,19 +362,44 @@ class Masyarakat extends BaseController
         $kategori = $this->request->getVar('kategori');
         $instansi = $this->request->getVar('instansi');
         $tipeaduan = $this->request->getVar('tipeaduan');
-        if (!$this->validate([
-            'filefoto' => [
+        // 1. Validasi File & Input Dasar
+        $rules = [
+            'judul'     => 'required|min_length[5]',
+            'isi'       => 'required',
+            'kategori'  => 'required',
+            'instansi'  => 'required',
+            'tipeaduan' => 'required',
+            'filefoto'  => [
                 'rules' => 'is_image[filefoto]|mime_in[filefoto,image/jpg,image/jpeg,image/gif,image/png]|max_size[filefoto,2048]',
                 'errors' => [
-                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png',
-                    'max_size' => 'Ukuran File Maksimal 2 MB'
+                    'mime_in' => 'Format file harus jpg, jpeg, gif, atau png',
+                    'max_size' => 'Ukuran file maksimal 2 MB',
                 ]
-
             ]
-        ])) {
-            session()->setFlashdata('errorfile', $this->validator->listErrors());
-            return redirect()->back()->withInput();
+        ];
+        $messages = [
+            'judul' => [
+                'required'   => 'Judul aduan wajib diisi.',
+                'min_length' => 'Judul minimal harus 5 karakter.'
+            ],
+            'isi' => [
+                'required' => 'Isi laporan tidak boleh kosong.'
+            ],
+            'kategori' => [
+                'required' => 'Silakan pilih kategori laporan.'
+            ],
+            'instansi' => [
+                'required' => 'Silakan pilih instansi tujuan.'
+            ],
+            'tipeaduan' => [
+                'required' => 'Pilih salah satu tipe aduan (Umum/Anonim/Rahasia).'
+            ]
+        ];
+
+        if (!$this->validate($rules, $messages)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
+        // ehndel upload
         $Berkasfoto = $this->request->getFile('filefoto');
         // jika form foto kosong
         if ($Berkasfoto->getError() == 4) {
@@ -412,7 +436,7 @@ class Masyarakat extends BaseController
         ];
         $this->Mhistori->save($data_historis);
         session()->setFlashdata('pesan_aduan', 'Pengaduan Berhasil Diajukan');
-        return redirect()->to('buataduan');
+        return redirect()->to('masyarakat/buataduan');
     }
 
     public function proses_feedback()

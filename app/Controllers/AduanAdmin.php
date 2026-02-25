@@ -34,88 +34,65 @@ class AduanAdmin extends BaseController
     public function index()
 
     {
-        if (session()->has('logged_in') and session()->get('logged_in') == true) {
-            if (session()->get('level') == 'admin') {
-                $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
-                $aduandiajukan = $this->Mpengaduan->getAduanDiajukan();
-                $aduanterverifikasi = $this->Mpengaduan->getAduanTerverifikasi();
-                $aduandialokasi = $this->Mpengaduan->getAduanDialokasi();
-                $aduandalamproses = $this->Mpengaduan->getAduanDalamProses();
-                $aduanselesai = $this->Mpengaduan->getAduanSelesai();
-                $aduanditolak = $this->Mpengaduan->getAduanDitolak();
-                $data = [
-                    'title' => 'Pengaduan',
-                    'diajukan' => $aduandiajukan,
-                    'terverifikasi' => $aduanterverifikasi,
-                    'dialokasi' => $aduandialokasi,
-                    'dalamproses' => $aduandalamproses,
-                    'selesai' => $aduanselesai,
-                    'ditolak' => $aduanditolak,
-                    'pengaduan_perstatus' => $pengaduan_perstatus,
 
-                ];
-                return view('admin_pages/v_pengaduan', $data);
-            } else {
-                session()->setFlashdata('pesanloginerr', 'Jangan Nakal Yaaaa!!');
-                return redirect()->to(base_url('/dashboard'));
-            }
-        } else {
-            session()->setFlashdata('pesanlogindulu', 'Anda Harus Login');
-            return redirect()->to(base_url('masuk_admin'));
-        }
+        $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
+        $aduandiajukan = $this->Mpengaduan->getAduanDiajukan();
+        $aduanterverifikasi = $this->Mpengaduan->getAduanTerverifikasi();
+        $aduandialokasi = $this->Mpengaduan->getAduanDialokasi();
+        $aduandalamproses = $this->Mpengaduan->getAduanDalamProses();
+        $aduanselesai = $this->Mpengaduan->getAduanSelesai();
+        $aduanditolak = $this->Mpengaduan->getAduanDitolak();
+        $data = [
+            'title' => 'Pengaduan',
+            'diajukan' => $aduandiajukan,
+            'terverifikasi' => $aduanterverifikasi,
+            'dialokasi' => $aduandialokasi,
+            'dalamproses' => $aduandalamproses,
+            'selesai' => $aduanselesai,
+            'ditolak' => $aduanditolak,
+            'pengaduan_perstatus' => $pengaduan_perstatus,
+
+        ];
+        return view('admin_pages/v_pengaduan', $data);
     }
     public function operatoraduan()
 
     {
-        if (session()->has('logged_in') and session()->get('logged_in') == true) {
-            if (session()->get('level') == 'operator') {
-                $get_id = session()->get('instansi_id');
-                $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
-                $aduandialokasi = $this->Mpengaduan->getAduanDialokasiOP($get_id);
-                $aduandalamproses = $this->Mpengaduan->getAduanDalamProsesOP($get_id);
-                $aduanselesai = $this->Mpengaduan->getAduanSelesaiOP($get_id);
-                $data = [
-                    'title' => 'Pengaduan',
-                    'dialokasi' => $aduandialokasi,
-                    'dalamproses' => $aduandalamproses,
-                    'selesai' => $aduanselesai,
-                    'pengaduan_perstatus' => $pengaduan_perstatus,
 
-                ];
-                return view('admin_pages/v_pengaduanoperator', $data);
-            } else {
-                session()->setFlashdata('pesanloginerr', 'Jangan Nakal Yaaaa!!');
-                return redirect()->to(base_url('/dashboard'));
-            }
-        } else {
-            session()->setFlashdata('pesanlogindulu', 'Anda Harus Login');
-            return redirect()->to(base_url('masuk_admin'));
-        }
+        $get_id = session()->get('instansi_id');
+        $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
+        $aduandialokasi = $this->Mpengaduan->getAduanDialokasiOP($get_id);
+        $aduandalamproses = $this->Mpengaduan->getAduanDalamProsesOP($get_id);
+        $aduanselesai = $this->Mpengaduan->getAduanSelesaiOP($get_id);
+        $data = [
+            'title' => 'Pengaduan',
+            'dialokasi' => $aduandialokasi,
+            'dalamproses' => $aduandalamproses,
+            'selesai' => $aduanselesai,
+            'pengaduan_perstatus' => $pengaduan_perstatus,
+
+        ];
+        return view('admin_pages/v_pengaduanoperator', $data);
     }
 
     public function detail($id_aduan)
 
     {
-        if (session()->has('logged_in') and session()->get('logged_in') == true) {
-            $isntansi = $this->Minstansi->findAll();
-            $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
-            $pengaduan = $this->Mpengaduan->getAll($id_aduan);
-            $timline = $this->Mhistori->getHistoris($id_aduan);
-            $feedback = $this->Mfeedback->getFeedback($id_aduan);
-            $data = [
-                'title' => 'Pengaduan',
-                'aduan' => $pengaduan,
-                'pengaduan_perstatus' => $pengaduan_perstatus,
-                'timline' => $timline,
-                'feedback' => $feedback,
-                'alokasi' => $isntansi
+        $isntansi = $this->Minstansi->findAll();
+        $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
+        $pengaduan = $this->Mpengaduan->getAll($id_aduan);
+        $timline = $this->Mhistori->getHistoris($id_aduan);
+        $feedback = $this->Mfeedback->getFeedback($id_aduan);
+        $data = [
+            'title' => 'Pengaduan',
+            'aduan' => $pengaduan,
+            'pengaduan_perstatus' => $pengaduan_perstatus,
+            'timline' => $timline,
+            'feedback' => $feedback,
+            'alokasi' => $isntansi
 
-            ];
-            return view('admin_pages/v_detail_pengaduan', $data);
-        } else {
-            session()->setFlashdata('pesanlogindulu', 'Anda Harus Login');
-            return redirect()->to(base_url('masuk_admin'));
-        }
+        ];
+        return view('admin_pages/v_detail_pengaduan', $data);
     }
 
     public function proses_terima($id_pengaduan)
@@ -268,43 +245,33 @@ class AduanAdmin extends BaseController
     public function viewlaporan()
 
     {
-        if (session()->has('logged_in') and session()->get('logged_in') == true) {
-            $instansi_id = session()->get('instansi_id');
-            $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
-            $allpengaduan = $this->Mpengaduan->semuaPengaduan();
-            $allpengaduanOP = $this->Mpengaduan->semuaPengaduanOP($instansi_id);
-            $data = [
-                'title' => 'Laporan Pengaduan',
-                'pengaduan_perstatus' => $pengaduan_perstatus,
-                'pengaduan' => $allpengaduan,
-                'pengaduanOP' => $allpengaduanOP
+        $instansi_id = session()->get('instansi_id');
+        $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
+        $allpengaduan = $this->Mpengaduan->semuaPengaduan();
+        $allpengaduanOP = $this->Mpengaduan->semuaPengaduanOP($instansi_id);
+        $data = [
+            'title' => 'Laporan Pengaduan',
+            'pengaduan_perstatus' => $pengaduan_perstatus,
+            'pengaduan' => $allpengaduan,
+            'pengaduanOP' => $allpengaduanOP
 
-            ];
-            return view('admin_pages/v_pengaduan_laporan', $data);
-        } else {
-            session()->setFlashdata('pesanlogindulu', 'Anda Harus Login');
-            return redirect()->to(base_url('masuk_admin'));
-        }
+        ];
+        return view('admin_pages/v_pengaduan_laporan', $data);
     }
     public function viewfilter()
 
     {
-        if (session()->has('logged_in') and session()->get('logged_in') == true) {
-            $instansi_id = session()->get('instansi_id');
-            $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
-            $allpengaduan = $this->Mpengaduan->semuaPengaduan();
-            $allpengaduanOP = $this->Mpengaduan->semuaPengaduanOP($instansi_id);
-            $data = [
-                'title' => 'Filter Pengaduan',
-                'pengaduan_perstatus' => $pengaduan_perstatus,
-                'pengaduan' => $allpengaduan,
-                'pengaduanOP' => $allpengaduanOP,
+        $instansi_id = session()->get('instansi_id');
+        $pengaduan_perstatus = $this->Mpengaduan->getPengaduanByDetailStatus();
+        $allpengaduan = $this->Mpengaduan->semuaPengaduan();
+        $allpengaduanOP = $this->Mpengaduan->semuaPengaduanOP($instansi_id);
+        $data = [
+            'title' => 'Filter Pengaduan',
+            'pengaduan_perstatus' => $pengaduan_perstatus,
+            'pengaduan' => $allpengaduan,
+            'pengaduanOP' => $allpengaduanOP,
 
-            ];
-            return view('admin_pages/v_pengaduan_laporan_filter', $data);
-        } else {
-            session()->setFlashdata('pesanlogindulu', 'Anda Harus Login');
-            return redirect()->to(base_url('masuk_admin'));
-        }
+        ];
+        return view('admin_pages/v_pengaduan_laporan_filter', $data);
     }
 }

@@ -88,7 +88,7 @@ function formatTanggalIndonesiaWITA($datetime)
                                                         </span>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a href="detail_pengaduan/<?= $alo['id_pengaduan'] ?>" aria-label="anchor" class="col-12 btn btn-sm bg-primary-subtle me-1" data-bs-original-title="Edit">
+                                                        <a href="/admin/detail_pengaduan/<?= $alo['id_pengaduan'] ?>" aria-label="anchor" class="col-12 btn btn-sm bg-primary-subtle me-1" data-bs-original-title="Edit">
                                                             <i class="mdi mdi-eye-outline fs-14 text-primary"></i> Detail
                                                         </a>
                                                     </td>
@@ -126,7 +126,7 @@ function formatTanggalIndonesiaWITA($datetime)
                                                         </span>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a href="detail_pengaduan/<?= $dal['id_pengaduan'] ?>" aria-label="anchor" class="col-12 btn btn-sm bg-primary-subtle me-1" data-bs-original-title="Edit">
+                                                        <a href="/admin/detail_pengaduan/<?= $dal['id_pengaduan'] ?>" aria-label="anchor" class="col-12 btn btn-sm bg-primary-subtle me-1" data-bs-original-title="Edit">
                                                             <i class="mdi mdi-eye-outline fs-14 text-primary"></i> Detail
                                                         </a>
                                                     </td>
@@ -164,7 +164,7 @@ function formatTanggalIndonesiaWITA($datetime)
                                                         </span>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a href="detail_pengaduan/<?= $sel['id_pengaduan'] ?>" aria-label="anchor" class="col-12 btn btn-sm bg-primary-subtle me-1" data-bs-original-title="Edit">
+                                                        <a href="/admin/detail_pengaduan/<?= $sel['id_pengaduan'] ?>" aria-label="anchor" class="col-12 btn btn-sm bg-primary-subtle me-1" data-bs-original-title="Edit">
                                                             <i class="mdi mdi-eye-outline fs-14 text-primary"></i> Detail
                                                         </a>
                                                     </td>

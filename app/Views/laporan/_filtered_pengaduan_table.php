@@ -38,7 +38,7 @@ function formatTanggalIndonesiaWITA($datetime)
         <h5 class="card-title">Hasil Pengaduan</h5>
     </div>
     <div class="card-body">
-        <form action="<?= base_url('PDFLaporanfilter'); ?>" method="get" target="_blank">
+        <form action="<?= base_url('/admin/PDFLaporanfilter'); ?>" method="get" target="_blank">
             <input type="hidden" value="<?= $tahun ?>" name="tahun">
             <input type="hidden" value="<?= $bulan ?>" name="bulan">
             <button type="submit" class="btn btn-md btn-success mb-2"><i data-feather="printer"></i> Print Pengaduan</button>

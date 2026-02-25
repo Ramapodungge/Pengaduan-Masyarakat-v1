@@ -42,7 +42,7 @@ class Kategori extends BaseController
         ]);
 
         session()->setFlashdata('pesansimpan', 'Berhasil Disimpan');
-        return redirect()->to('kategori');
+        return redirect()->to('admin/kategori');
     }
     public function proses_ubah($id_kategori)
     {
@@ -52,7 +52,7 @@ class Kategori extends BaseController
             'nama_kategori' => $nama_kategori
         ]);
         session()->setFlashdata('pesansimpan', 'Berhasil Diubah');
-        return redirect()->to('kategori');
+        return redirect()->to('admin/kategori');
     }
     public function hapus($id)
     {
@@ -72,7 +72,7 @@ class Kategori extends BaseController
             'isi_deskripsi' => $isi_deskripsi
         ]);
         session()->setFlashdata('pesansimpan', 'Berhasil Disimpan');
-        return redirect()->to('kategori');
+        return redirect()->to('admin/kategori');
     }
     public function proses_ubah_deskripsi($id_deskripsi)
     {
@@ -84,7 +84,7 @@ class Kategori extends BaseController
             'isi_deskripsi' => $isi_deskripsi
         ]);
         session()->setFlashdata('pesansimpan', 'Berhasil Diubah');
-        return redirect()->to('kategori');
+        return redirect()->to('admin/kategori');
     }
     public function hapus_deskripsi($id)
     {

@@ -48,7 +48,8 @@ function merubah_tanggal($tgl)
     <div class="container-xxl mt-lg-100 mb-100">
         <div class="row">
             <div class="col-lg-9 col-md-12">
-                <h3>Panduan</h3>
+                <h3 class="d-sm-none" style="margin-top: 40px;">Panduan</h3>
+                <h3 class="d-md-block d-none">Panduan</h3>
                 <p style="text-align: justify;"> memberikan petunjuk langkah demi langkah kepada masyarakat agar dapat menggunakan aplikasi pengaduan dengan benar, cepat, dan tanpa kebingungan.
                     Dengan adanya halaman ini, pengguna (terutama masyarakat umum) bisa memahami alur penggunaan sistem tanpa perlu bantuan admin.</p>
 

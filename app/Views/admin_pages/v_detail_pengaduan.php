@@ -40,10 +40,10 @@ function formatTanggalIndonesiaWITA($datetime)
         <div class="flex-grow-1">
             <h4 class="fs-18 fw-semibold m-0">Pengaduan</h4>
             <?php if (session()->get('level') == 'admin'): ?>
-                <span style="float: right;"><a href="daftaraduan" class="text-dark"><span class="badge bg-dark rounded align-items-center p-2">kembali</span></a></span>
+                <span style="float: right;"><a href="/admin/daftaraduan" class="text-dark"><span class="badge bg-dark rounded align-items-center p-2">kembali</span></a></span>
             <?php endif ?>
             <?php if (session()->get('level') == 'operator'): ?>
-                <span style="float: right;"><a href="daftaraduanoperator" class="text-dark"><span class="badge bg-dark rounded align-items-center p-2">kembali</span></a></span>
+                <span style="float: right;"><a href="/admin/daftaraduanoperator" class="text-dark"><span class="badge bg-dark rounded align-items-center p-2">kembali</span></a></span>
             <?php endif ?>
         </div>
     </div>
@@ -74,22 +74,24 @@ function formatTanggalIndonesiaWITA($datetime)
                         <img src="foto_laporan/<?= $adu['foto'] ?>" alt="" id="fullImage" style="display:none; width: 100%; height: 100vh; cursor:pointer;" onclick="showThumbnail()">
                         <div class="mt-3 d-flex gap-2">
                             <?php if ($adu['status'] == "Diajukan"): ?>
-                                <form method="post" action="terima_pengaduan/<?= $adu['id_pengaduan'] ?>">
+                                <form method="post" action="/admin/terima_pengaduan/<?= $adu['id_pengaduan'] ?>">
                                     <input type="hidden" name="email" value="<?= $adu['email'] ?>">
                                     <button type="submit" class="btn btn-xl btn-info">Terima</button>
                                 </form>
                             <?php endif ?>
                             <?php if ($adu['status'] == "Terverifikasi"): ?>
                                 <a data-bs-toggle="modal" data-bs-target="#bs-example-modal-terima<?= $adu['id_pengaduan'] ?>"><button type=" button" class="btn btn-xl btn-success">Alokasi</button></a>
-                                <form method="post" action="proses_pengaduan/<?= $adu['id_pengaduan'] ?>">
-                                    <input type="hidden" name="email" value="<?= $adu['email'] ?>">
-                                    <button type="submit" class="btn btn-xl btn-warning">Proses</button>
-                                </form>
+                                <?php if ($adu['nama_instansi'] == 'Kecamatan Kabila Bone'): ?>
+                                    <form method="post" action="/admin/proses_pengaduan/<?= $adu['id_pengaduan'] ?>">
+                                        <input type="hidden" name="email" value="<?= $adu['email'] ?>">
+                                        <button type="submit" class="btn btn-xl btn-warning">Proses</button>
+                                    </form>
+                                <?php endif ?>
                             <?php endif ?>
                             <?php if ($adu['status'] == "Dialokasi"):
                                 if (session()->get('level') == 'operator'):
                             ?>
-                                    <form method="post" action="proses_pengaduan/<?= $adu['id_pengaduan'] ?>">
+                                    <form method="post" action="/admin/proses_pengaduan/<?= $adu['id_pengaduan'] ?>">
                                         <input type="hidden" name="email" value="<?= $adu['email'] ?>">
                                         <button type="submit" class="btn btn-xl btn-warning">Proses</button>
                                     </form>
@@ -117,7 +119,7 @@ function formatTanggalIndonesiaWITA($datetime)
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                         </button>
                                     </div>
-                                    <form method="post" class="row g-3" id="uploadForm" action="selesai_pengaduan/<?= $adu['id_pengaduan'] ?>" enctype="multipart/form-data">
+                                    <form method="post" class="row g-3" id="uploadForm" action="/admin/selesai_pengaduan/<?= $adu['id_pengaduan'] ?>" enctype="multipart/form-data">
                                         <?= csrf_field() ?>
                                         <div class=" modal-body">
                                             <div class="col-12 mt-3">
@@ -144,7 +146,7 @@ function formatTanggalIndonesiaWITA($datetime)
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                         </button>
                                     </div>
-                                    <form class="row g-3" method="POST" action="alokasi_pengaduan/<?= $adu['id_pengaduan'] ?>">
+                                    <form class="row g-3" method="POST" action="/admin/alokasi_pengaduan/<?= $adu['id_pengaduan'] ?>">
                                         <?= csrf_field() ?>
                                         <div class="modal-body">
                                             <div class="col-12 mt-3">
@@ -177,7 +179,7 @@ function formatTanggalIndonesiaWITA($datetime)
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                         </button>
                                     </div>
-                                    <form class="row g-3" method="POST" action="tolak_pengaduan/<?= $adu['id_pengaduan'] ?>">
+                                    <form class="row g-3" method="POST" action="/admin/tolak_pengaduan/<?= $adu['id_pengaduan'] ?>">
                                         <?= csrf_field() ?>
                                         <div class="modal-body">
                                             <div class="col-12 mt-3">

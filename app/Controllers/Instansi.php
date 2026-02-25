@@ -35,7 +35,7 @@ class Instansi extends BaseController
             'nama_instansi' => $nama_instansi
         ]);
         session()->setFlashdata('pesansimpan', 'Berhasil Disimpan');
-        return redirect()->to('instansi');
+        return redirect()->to('admin/instansi');
     }
     public function proses_ubah($id_instansi)
     {
@@ -45,7 +45,7 @@ class Instansi extends BaseController
             'nama_instansi' => $nama_instansi
         ]);
         session()->setFlashdata('pesansimpan', 'Berhasil Diubah');
-        return redirect()->to('instansi');
+        return redirect()->to('admin/instansi');
     }
     public function hapus($id)
     {

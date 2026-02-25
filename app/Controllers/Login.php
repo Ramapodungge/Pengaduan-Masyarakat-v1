@@ -42,10 +42,10 @@ class Login extends BaseController
                     'nama' => $admin['nama_admin'],
                     'username' => $admin['username'],
                     'level' => 'admin',
-                    'logged_in' => true
+                    'logged_in_admin' => true
                 ]);
                 $session->setFlashdata('pesanlogin', 'Berhasil Masuk');
-                return redirect()->to('/dashboard'); // Redirect ke dashboard Admin
+                return redirect()->to('admin/dashboard'); // Redirect ke dashboard Admin
             }
         } elseif ($level == 'operator') {
             // Cek di tabel admin
@@ -59,10 +59,10 @@ class Login extends BaseController
                     'nama' => $operator['nama_admin'],
                     'username' => $operator['username'],
                     'level' => 'operator',
-                    'logged_in' => true
+                    'logged_in_admin' => true
                 ]);
                 $session->setFlashdata('pesanlogin', 'Berhasil Masuk');
-                return redirect()->to('/dashboard'); // Redirect ke dashboard Operator
+                return redirect()->to('admin/dashboard'); // Redirect ke dashboard Operator
             }
         }
 

@@ -40,8 +40,25 @@
             </div>
 
             <div class="d-grid bg-white p-20 p-md-34 p-xxl-43 mt-24 gap-34 rounded-20 shadow-2">
+                <?php if (session()->getFlashdata('pesan_aduan')) : ?>
+                    <div class="alert alert-success alert-dismissible bg-success fade show" role="alert">
+                        <strong>Berhasil!</strong> <?= session()->getFlashdata('pesan_aduan'); ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
 
-                <form method="POST" action="buat_aduan" class="row" enctype="multipart/form-data">
+                <?php if (session()->getFlashdata('errors')) : ?>
+                    <div class="alert alert-danger alert-dismissible fade show" style="background-color: salmon;" role="alert">
+                        <strong>Mohon Maaf!</strong> Ada beberapa kesalahan:
+                        <ul class="mb-0 mt-2">
+                            <?php foreach (session()->getFlashdata('errors') as $error) : ?>
+                                <li><?= $error ?></li>
+                            <?php endforeach ?>
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+                <form method="POST" action="/masyarakat/buat_aduan" class="row" enctype="multipart/form-data">
                     <?= csrf_field() ?>
                     <div class="col-md-12 col-xl-12 my-15 my-xl-24">
                         <label class="form-label">Judul Aduan</label>
@@ -59,10 +76,10 @@
                         <select name="kategori" id="" class="form-control">
                             <option value="" hidden>Pilih</option>
                             <?php foreach ($kategori as $kat): ?>
-                                <?php if (session()->get('level') == 'warga'): ?>
+                                <?php if (session()->get('role') == 'warga'): ?>
                                     <option value="<?= $kat['id_kategori'] ?>"><?= $kat['nama_kategori'] ?></option>
                                 <?php endif ?>
-                                <?php if (session()->get('level') == 'tamu'):
+                                <?php if (session()->get('role') == 'tamu'):
                                     if ($kat['nama_kategori'] == 'Layanan Publik' || $kat['nama_kategori'] == 'Infrastruktur dan Fasilitas Umum' || $kat['nama_kategori'] == 'Keamanan dan Ketertiban') {
                                 ?>
                                         <option value="<?= $kat['id_kategori'] ?>"><?= $kat['nama_kategori'] ?></option>
