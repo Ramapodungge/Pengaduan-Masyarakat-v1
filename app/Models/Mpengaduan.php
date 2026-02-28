@@ -188,6 +188,7 @@ class Mpengaduan extends Model
             ->join('instansi', 'instansi.id_instansi = pengaduan.id_instansi', 'left')
             ->join('kategori_pengaduan', 'kategori_pengaduan.id_kategori = pengaduan.id_kategori', 'left')
             ->where('pengaduan.id_masyarakat', $nik)
+            ->orderBy('pengaduan.created_at', 'DESC')
             ->paginate($limit); // Pagination
     }
 

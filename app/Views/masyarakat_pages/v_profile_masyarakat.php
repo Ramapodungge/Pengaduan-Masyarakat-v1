@@ -185,6 +185,11 @@ function merubah_tanggal($tgl)
                                                 <i class="fas fa-search"></i> Detail
                                             </button>
                                         </a>
+                                        <?php if ($adu['status'] == "Diajukan") : ?>
+                                            <a aria-label="anchor" class="btn btn-rounded btn-book bg-danger" data-bs-toggle="tooltip" data-bs-original-title="Delete" onclick="hapusPengaduan(<?= $adu['id_pengaduan']; ?>)">
+                                                <i class="fas fa-trash"></i>Batalkan
+                                            </a>
+                                        <?php endif ?>
                                     </div>
                                 </div>
                             <?php
@@ -368,4 +373,5 @@ function merubah_tanggal($tgl)
         </div><!-- /.modal-dialog -->
     </div>
 <?php endforeach ?>
+
 <?= $this->endSection(); ?>

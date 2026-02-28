@@ -103,6 +103,10 @@ $routes->group('admin', ['filter' => 'authAdmin'], function ($routes) {
 $routes->group('masyarakat', ['filter' => 'authMas'], function ($routes) {
     $routes->get('buataduan', 'Masyarakat::buat');
     $routes->get('profile', 'Masyarakat::akunku');
+    $routes->delete('destroy_pengaduan/(:num)', 'Masyarakat::hapus_aduan/$1');
+    // Jika di dalam group 'masyarakat'
+
+
     //proses buat aduan
     $routes->post('buat_aduan', 'Masyarakat::proses_buat_aduan');
     //proses proses masyarakat

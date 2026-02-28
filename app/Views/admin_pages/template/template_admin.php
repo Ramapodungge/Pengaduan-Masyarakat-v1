@@ -400,7 +400,6 @@
 
         <?php if (session()->getFlashdata('pesanloginerr')): ?>
             Swal.fire({
-                position: "top-end",
                 icon: "error",
                 title: "<?= session()->getFlashdata('pesanloginerr') ?>",
                 showConfirmButton: false,
@@ -409,7 +408,6 @@
         <?php endif; ?>
         <?php if (session()->getFlashdata('pesanlogin')): ?>
             Swal.fire({
-                position: "top-end",
                 icon: "success",
                 title: "<?= session()->getFlashdata('pesanlogin') ?>",
                 showConfirmButton: false,
@@ -418,7 +416,6 @@
         <?php endif; ?>
         <?php if (session()->getFlashdata('pesansimpan')): ?>
             Swal.fire({
-                position: "top-end",
                 icon: "success",
                 title: "<?= session()->getFlashdata('pesansimpan') ?>",
                 showConfirmButton: false,

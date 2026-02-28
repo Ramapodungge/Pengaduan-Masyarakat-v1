@@ -16,7 +16,7 @@
                 </div><!-- end card header -->
 
                 <div class="card-body">
-                    <a href="laporan_masyarakat" class="mb-3" target="_blank"><Button type="button" class="btn btn-md btn-success mb-2"><i data-feather="printer"></i> Print Masyarakat</Button></a>
+                    <a href="/admin/laporan_masyarakat" class="mb-3" target="_blank"><Button type="button" class="btn btn-md btn-success mb-2"><i data-feather="printer"></i> Print Masyarakat</Button></a>
                     <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap">
                         <thead>
                             <tr>

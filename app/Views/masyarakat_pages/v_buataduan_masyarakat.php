@@ -62,18 +62,24 @@
                     <?= csrf_field() ?>
                     <div class="col-md-12 col-xl-12 my-15 my-xl-24">
                         <label class="form-label">Judul Aduan</label>
-                        <input type="text" name="judul" class="form-control rounded-pill" placeholder="Type here" />
+                        <input type="text" name="judul" class="form-control rounded-pill <?= (isset(session('errors')['judul'])) ? 'is-invalid' : '' ?>" placeholder="Type here" />
+                        <?php if (isset(session()->getFlashdata('errors')['judul'])) : ?>
+                            <small class="text-mute text-orange-red">*<?= session('errors')['judul'] ?></small>
+                        <?php endif ?>
                     </div>
                     <!-- /.col -->
                     <div class="col-12 my-15 my-xl-24">
                         <label for="textareaAboutyou" class="form-label">Isi Laporan</label>
-                        <textarea class="form-control" name="isi" id="textareaAboutyou" rows="5"
+                        <textarea class="form-control <?= (isset(session('errors')['isi'])) ? 'is-invalid' : '' ?>" name="isi" id="textareaAboutyou" rows="5"
                             placeholder="Type here"></textarea>
+                        <?php if (isset(session()->getFlashdata('errors')['isi'])) : ?>
+                            <small class="text-mute text-orange-red">*<?= session('errors')['isi'] ?></small>
+                        <?php endif ?>
                     </div>
                     <input type="hidden" value="<?= session()->get('nik') ?>" name="masyarakat">
                     <div class="col-md-6 col-xl-6 my-15 my-xl-24">
                         <label for="inputMiddlename" class="form-label">Kategori</label>
-                        <select name="kategori" id="" class="form-control">
+                        <select name="kategori" id="" class="form-control <?= (isset(session('errors')['kategori'])) ? 'is-invalid' : '' ?>">
                             <option value="" hidden>Pilih</option>
                             <?php foreach ($kategori as $kat): ?>
                                 <?php if (session()->get('role') == 'warga'): ?>
@@ -88,17 +94,23 @@
                                 endif ?>
                             <?php endforeach ?>
                         </select>
+                        <?php if (isset(session()->getFlashdata('errors')['kategori'])) : ?>
+                            <small class="text-mute text-orange-red">*<?= session('errors')['kategori'] ?></small>
+                        <?php endif ?>
                     </div>
                     <!-- /.col -->
 
                     <div class="col-md-6 col-xl-6 my-15 my-xl-24">
                         <label for="inputLastname" class="form-label">Instansi Tujuan</label>
-                        <select name="instansi" id="" class="form-control">
+                        <select name="instansi" id="" class="form-control <?= (isset(session('errors')['instansi'])) ? 'is-invalid' : '' ?>">
                             <option value="" hidden>Pilih</option>
                             <?php foreach ($instansi as $ins): ?>
                                 <option value="<?= $ins['id_instansi'] ?>"><?= $ins['nama_instansi'] ?></option>
                             <?php endforeach ?>
                         </select>
+                        <?php if (isset(session()->getFlashdata('errors')['instansi'])) : ?>
+                            <small class="text-mute text-orange-red">*<?= session('errors')['instansi'] ?></small>
+                        <?php endif ?>
                     </div>
                     <!-- /.col -->
 
@@ -109,7 +121,7 @@
                             <div class="upload-item upload-zone" id="uploadZone"
                                 onclick="document.getElementById('fileInput').click()">
                                 <input type="file" id="fileInput" name="filefoto"
-                                    accept=".ppt,.jpg,.jpeg,.png" style="display: none;">
+                                    accept=".ppt,.jpg,.jpeg,.png" style="display: none;" class="">
                                 <div class="upload-icon">
                                     <i class="fas fa-cloud"></i>
                                 </div>
@@ -133,6 +145,9 @@
                                 </button>
                             </div>
                         </div>
+                        <?php if (isset(session()->getFlashdata('errors')['filefoto'])) : ?>
+                            <small class="text-mute text-orange-red">*<?= session('errors')['filefoto'] ?></small>
+                        <?php endif ?>
                     </div>
                     <label class="form-label">Tipe Aduan</label>
                     <div class="checkbox-type type-1">
@@ -162,7 +177,9 @@
                             <div class="checkbox-type-text fw-semiBold">Rahasia</div>
                         </label>
                     </div>
-
+                    <?php if (isset(session()->getFlashdata('errors')['tipeaduan'])) : ?>
+                        <small class="text-mute text-orange-red">*<?= session('errors')['tipeaduan'] ?></small>
+                    <?php endif ?>
                     <div class="col-12 d-flex my-15 my-xl-24">
                         <button type="submit" class="btn btn-primary fw-semiBold py-12 px-24 px-md-60 rounded-pill"
                             role="button">Submit</button>

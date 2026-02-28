@@ -189,6 +189,8 @@ class Masyarakat extends BaseController
         $cek_rowfeedback = $this->Mfeedback->where('id_pengaduan', $id_aduan)->get()->getNumRows();
         $ambil_idfeedback = $this->Mfeedback->where('id_pengaduan', $id_aduan)->get()->getResultArray();
 
+        // status
+        $pengaduanStatus = $this->Mpengaduan->where('id_pengaduan', $id_aduan)->first();
 
         $data = [
             'title' => "Detail Aduan",
@@ -198,6 +200,7 @@ class Masyarakat extends BaseController
             'feedback' => $feedback,
             'cek_row' => $cek_rowfeedback,
             'id_pengaduan' => $id_aduan,
+            'pengaduanStatus' => $pengaduanStatus
 
 
         ];
@@ -489,5 +492,27 @@ class Masyarakat extends BaseController
             'title' => 'Panduan'
         ];
         return view('masyarakat_pages/v_panduan', $data);
+    }
+
+    public function hapus_aduan($id)
+    {
+        $dataAduan = $this->Mpengaduan->find($id);
+
+        if ($dataAduan) {
+            $nama_file = $dataAduan['foto'];
+
+            // Hapus file fisik
+            if ($nama_file && file_exists(FCPATH . 'foto_laporan/' . $nama_file)) {
+                unlink(FCPATH . 'foto_laporan/' . $nama_file);
+            }
+
+            // Hapus data database
+            if ($this->Mpengaduan->delete($id)) {
+                // KIRIM RESPON JSON (PENTING!)
+                return $this->response->setJSON(['success' => true]);
+            }
+        }
+
+        return $this->response->setJSON(['success' => false]);
     }
 }

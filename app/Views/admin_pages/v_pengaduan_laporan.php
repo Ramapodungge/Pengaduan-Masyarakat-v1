@@ -80,7 +80,7 @@ function formatTanggalIndonesiaWITA($datetime)
                                                     <td><?= $adu['judul'] ?></td>
                                                     <td><?= $adu['isi'] ?></td>
                                                     <td class="text-center">
-                                                        <a href="formulir_pengaduan/<?= $adu['id_pengaduan'] ?>" target="_blank">
+                                                        <a href="/admin/formulir_pengaduan/<?= $adu['id_pengaduan'] ?>" target="_blank">
                                                             <i class="mdi mdi-printer text-dark" style="font-size: 30px;"></i>
                                                         </a>
                                                     </td>
@@ -121,7 +121,7 @@ function formatTanggalIndonesiaWITA($datetime)
                                                     <td><?= $adu['judul'] ?></td>
                                                     <td><?= $adu['isi'] ?></td>
                                                     <td class="text-center">
-                                                        <a href="formulir_pengaduan/<?= $adu['id_pengaduan'] ?>" target="_blank">
+                                                        <a href="/admin/formulir_pengaduan/<?= $adu['id_pengaduan'] ?>" target="_blank">
                                                             <i class="mdi mdi-printer text-dark" style="font-size: 30px;"></i>
                                                         </a>
                                                     </td>

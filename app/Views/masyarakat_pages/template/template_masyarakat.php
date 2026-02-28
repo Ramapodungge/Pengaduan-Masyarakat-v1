@@ -552,6 +552,51 @@
             feedbackForm.style.display = 'none'; // Menyembunyikan form
         });
     </script>
+    <script>
+        // perintah membatalkan aduan
+        // Tangkap semua tombol dengan class btn-hapus
+        function hapusPengaduan(id) {
+            Swal.fire({
+                title: 'Yakin ingin membatalkan?',
+                text: "Data yang telah dibatalkan tidak bisa dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Batalkan!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`<?= site_url('masyarakat/destroy_pengaduan/') ?>` + id, {
+                            method: 'DELETE',
+                            headers: {
+                                // Tambahkan Header ini agar tidak terkena filter CSRF CI4
+                                "X-Requested-With": "XMLHttpRequest"
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Dibatalkan!',
+                                    text: 'Pengaduan telah berhasil dibatalkan.',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire('Gagal!', 'Data tidak ditemukan atau gagal dihapus.', 'error');
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire('Error!', 'Terjadi kesalahan sistem.', 'error');
+                        });
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
