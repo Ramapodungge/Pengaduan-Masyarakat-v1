@@ -135,14 +135,29 @@ class Admin extends BaseController
         $instansi_id = session()->get('instansi_id');
 
         // Mengambil data pengaduan berdasarkan filter
-        if ($bulan && $tahun) {
-            $data['pengaduan'] = $this->Mpengaduan->filterByMonthYear($bulan, $tahun);
-        } else if ($bulan) {
-            $data['pengaduan'] = $this->Mpengaduan->filterByMonth($bulan);
-        } else if ($tahun) {
-            $data['pengaduan'] = $this->Mpengaduan->filterByYear($tahun);
-        } else {
-            $data['pengaduan'] = $this->Mpengaduan->getAllWithJoins();
+        if (session()->get('level') == 'admin') {
+
+            if ($bulan && $tahun) {
+                $data['pengaduan'] = $this->Mpengaduan->filterByMonthYear($bulan, $tahun);
+            } else if ($bulan) {
+                $data['pengaduan'] = $this->Mpengaduan->filterByMonth($bulan);
+            } else if ($tahun) {
+                $data['pengaduan'] = $this->Mpengaduan->filterByYear($tahun);
+            } else {
+                $data['pengaduan'] = $this->Mpengaduan->getAllWithJoins();
+            }
+        }
+        if (session()->get('level') == 'operator') {
+
+            if ($bulan && $tahun) {
+                $data['pengaduan'] = $this->Mpengaduan->filterByMonthYearOP($bulan, $tahun, $instansi_id);
+            } else if ($bulan) {
+                $data['pengaduan'] = $this->Mpengaduan->filterByMonthOP($bulan, $instansi_id);
+            } else if ($tahun) {
+                $data['pengaduan'] = $this->Mpengaduan->filterByYearOP($tahun, $instansi_id);
+            } else {
+                $data['pengaduan'] = $this->Mpengaduan->getAllWithJoins();
+            }
         }
 
         // Jika permintaan AJAX, kirimkan hasil dalam bentuk HTML
